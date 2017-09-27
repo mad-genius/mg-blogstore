@@ -37,7 +37,7 @@ MGBlogStore.prototype.getFirstPage = function(callback) {
 	var posts, numOfPostPages, categories;
 	var stickyPosts = [];
 	var postRequest, categoriesRequest;
-	var stickyRequest = fetch('/wp-json/wp/v2/posts?sticky=true&per_page=100&' + store.customQuery);
+	var stickyRequest = fetch(store.baseURL + '/posts?sticky=true&per_page=100&' + store.customQuery);
 	
 	store.postsURL = store.baseURL + '/posts?';
 
@@ -59,7 +59,7 @@ MGBlogStore.prototype.getFirstPage = function(callback) {
 			}
 
 			// get categories
-			categoriesRequest = fetch('/wp-json/wp/v2/categories?per_page=100');
+			categoriesRequest = fetch(store.baseURL + '/categories?per_page=100');
 
 			categoriesRequest.then(store.json).then(function(categoriesResponse) {
 				// get categories from response
