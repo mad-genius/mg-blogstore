@@ -1,6 +1,6 @@
 # MG Blogstore
 
-MG Blogstore fetches all posts from the WordPress REST API. It can get the first page of posts first, give you an opportunity to do something with those posts, and then make recursive calls to the API for the rest of the posts.
+MG Blogstore fetches all posts from the WordPress REST API. It can get one page of posts first, give you an opportunity to do something with those posts, and then make recursive calls to the API for the rest of the posts.
 
 Only the `post` post type and its categories are supported, currently. It assumes REST API v2. There are a few configuration [options](#options), with more on the roadmap.
 
