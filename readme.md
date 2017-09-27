@@ -36,10 +36,11 @@ Your `MGBlogstore` instance has access to:
 
 ## Options
 
-You can tell MG Blogstore how many posts per page you want. You can also pass a custom query string that will be appended to every request (for example if you were using the [REST API – Filter Fields](https://wordpress.org/plugins/rest-api-filter-fields/) plugin).
+You can tell MG Blogstore what base URL to use and how many posts per page you want. You can also pass a custom query string that will be appended to every request (for example if you were using the [REST API – Filter Fields](https://wordpress.org/plugins/rest-api-filter-fields/) plugin).
 
 ```js
 var blogStore = new MGBlogStore({
+    baseURL: '/wp-json/wp/v2', // default
     perPage: 30,
     customQuery: 'fields=id,title,link,date,excerpt.rendered,categories'
 });
