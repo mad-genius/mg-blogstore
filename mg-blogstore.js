@@ -8,7 +8,7 @@
                                __/ |                         
                               |___/     
 
-* MG Breakpoint
+* MG Blogstore
 *
 * Copyright (c) 2017 Mad Genius Inc (https://madg.com)
 *
