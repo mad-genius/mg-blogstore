@@ -28,7 +28,7 @@ function MGBlogStore(options) {
 	this.perPage = this.options.perPage;
 	this.stickyQuery = 'exclude=';
 	this.categories = [];
-	this.baseURL = '/wp-json/wp/v2';
+	this.baseURL = this.options.baseURL;
 	this.customQuery = this.options.customQuery;
 }
 
@@ -119,7 +119,8 @@ MGBlogStore.prototype.makeQueryString = function(queryParts) {
 MGBlogStore.prototype.mergeOptions = function(options) {
 	var defaults = {
 		perPage: 10,
-		customQuery: ''
+		customQuery: '',
+		baseURL: '/wp-json/wp/v2'
 	};
 
 	if(typeof options === 'object') {
