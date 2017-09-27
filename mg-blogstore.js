@@ -15,7 +15,7 @@
 * By Blake Watson (@blakewatson)
 * Licensed under the MIT license.
 *
-* @link https://github.com/Mad-Genius/mg-breakpoint
+* @link https://github.com/Mad-Genius/mg-blogstore
 * @author Blake Watson
 * @version 0.1.0
 */
