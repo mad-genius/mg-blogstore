@@ -37,12 +37,12 @@ MGBlogStore.prototype.getFirstPage = function(callback) {
 	var posts, numOfPostPages, categories;
 	var stickyPosts = [];
 	var postRequest, categoriesRequest;
-	var stickyRequest = $.get('/wp-json/wp/v2/posts?sticky=true&per_page=100&' + store.customQuery);
+	var stickyRequest = fetch('/wp-json/wp/v2/posts?sticky=true&per_page=100&' + store.customQuery);
 	
 	store.postsURL = store.baseURL + '/posts?';
 
 	return new Promise(function(resolve, reject) {
-		$.when(stickyRequest).done(function(stickyResponse) {
+		stickyRequest.then(store.json).then(function(stickyResponse) {
 			if(stickyResponse.length > 0) {
 				// save sticky posts
 				store.posts = [].concat(stickyResponse);
@@ -59,9 +59,9 @@ MGBlogStore.prototype.getFirstPage = function(callback) {
 			}
 
 			// get categories
-			categoriesRequest = $.get('/wp-json/wp/v2/categories?per_page=100');
+			categoriesRequest = fetch('/wp-json/wp/v2/categories?per_page=100');
 
-			$.when(categoriesRequest).done(function(categoriesResponse) {
+			categoriesRequest.then(store.json).then(function(categoriesResponse) {
 				// get categories from response
 				store.categories = categoriesResponse;
 				// get the first page of posts
@@ -85,10 +85,12 @@ MGBlogStore.prototype.getPosts = function() {
 	url += store.makeQueryString(queryParts);
 
 	return new Promise(function(resolve, reject) {
-		$.get(url, function(response, status, request) {
-			store.totalPages = parseInt(request.getResponseHeader('X-WP-TotalPages'));
+		fetch(url).then(function(response) {
+			store.totalPages = response.headers.get('X-WP-TotalPages');
 			store.currentPage++;
-			store.posts = store.posts.concat(response);
+			return response.json();
+		}).then(function(json) {
+			store.posts = store.posts.concat(json);
 			resolve();
 		});
 	});
@@ -130,3 +132,7 @@ MGBlogStore.prototype.mergeOptions = function(options) {
 
 	return defaults;
 }
+
+MGBlogStore.prototype.json = function(response) {
+	return response.json();
+};
